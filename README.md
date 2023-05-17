@@ -1,4 +1,4 @@
-# Express TypeScript Starter
+# Express TypeScript Zod Starter
 
 This is a minimal Typesafe TypeScript starter template for an Express.js application. It provides a structured setup with TypeScript, Express, Zod, Jest, and Prettier.
 
@@ -28,6 +28,12 @@ Before you begin, ensure that you have the following installed:
     npm start
 
     The server will start on http://localhost:3000.
+
+## Run the application in Docker
+
+    docker build -t express-zod-starter .
+
+    docker run -p 3000:3000 express-zod-starter
 
 ## Available Scripts
 

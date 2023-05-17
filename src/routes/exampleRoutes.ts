@@ -1,6 +1,5 @@
 import { Router as createRouter, } from 'express';
-import { z, ZodError } from 'zod';
-import type { Router, Request, Response } from 'express';
+import type { Router } from 'express';
 import { createExample } from '~controllers/exampleController';
 
 const router: Router = createRouter();

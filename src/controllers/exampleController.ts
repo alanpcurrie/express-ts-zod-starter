@@ -10,12 +10,10 @@ const exampleSchema = z.object({
     createdAt: z.string().nonempty(),
 });
 
-
-
 const createExample = (req: Request, res: Response) => {
     try {
         const { title, userId } = exampleSchema.parse(req.body);
-        res.json({ message: `Post: ${title}! by ${userId}` });
+        res.json({ message: `Post: ${title} by ${userId}` });
     } catch (error: unknown) {
         if (error instanceof ZodError) {
             const validationErrors = error.errors.map((err) => err.message);
