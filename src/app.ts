@@ -1,12 +1,15 @@
-import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import exampleRoutes from '~routes/exampleRoutes';
+
 import { handleJsonBody } from '~middleware/body-parser';
 import { setupSwagger } from '~middleware/swagger';
-import type { Application, Request, Response, NextFunction } from 'express';
+import exampleRoutes from '~routes/exampleRoutes';
+import { logger } from '~utils/logger';
+
+import type { Application, NextFunction, Request, Response } from 'express';
 
 const app: Application = express();
 // Load environment variables from a .env file into process.env
@@ -27,7 +30,7 @@ app.use(exampleRoutes);
 setupSwagger(app);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
+    logger.error(`❌ Error ${err.stack}`);
     res.status(500).json({ message: 'Internal Server Error' });
 });
 

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { logger } from "~utils/logger";
 
 const serverSchema = z.object({
     NODE_ENV: z.enum(["development", "test", "production"]),
@@ -21,7 +22,10 @@ const validateServerEnv = (env) => {
 
     if (!parsed.success) {
         const fieldErrors = parsed.error.flatten().fieldErrors;
-        console.error("❌ Invalid server-side environment variables:", fieldErrors);
+        logger.log({
+            message: `❌ Invalid server-side environment variables:", ${fieldErrors}`,
+            level: 'error'
+        });
         throw new Error("❌  Invalid server-side environment variables");
     }
     return parsed.data;

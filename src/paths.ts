@@ -5,7 +5,7 @@ const paths = {
     '~controllers/*': ['src/controllers/*'],
     '~models/*': ['src/models/*'],
     '`routes/*': ['src/routes/*'],
-    "~middleware/*": ["src/middleware/*"],
+    '~middleware/*': ['src/middleware/*'],
     '~db/*': ['src/db/*'],
 };
 

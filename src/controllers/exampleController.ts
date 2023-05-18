@@ -1,5 +1,6 @@
-import type { Request, Response } from 'express';
 import { z, ZodError } from 'zod';
+
+import type { Request, Response } from 'express';
 
 const exampleSchema = z.object({
     id: z.number().positive(),
@@ -17,7 +18,10 @@ const createExample = (req: Request, res: Response) => {
     } catch (error: unknown) {
         if (error instanceof ZodError) {
             const validationErrors = error.errors.map((err) => err.message);
-            res.status(400).json({ message: 'Invalid input.', errors: validationErrors });
+            res.status(400).json({
+                message: 'Invalid input.',
+                errors: validationErrors,
+            });
         } else {
             res.status(500).json({ message: 'Internal Server Error' });
         }

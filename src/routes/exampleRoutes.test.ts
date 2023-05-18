@@ -1,14 +1,15 @@
 import request from 'supertest';
-import app from '../app';
+
+import app from '~src/app';
 
 const PAYLOAD = {
-    "id": 1,
-    "userId": "__test-user",
-    "slug": "__test-slug",
-    "title": "__test-title",
-    "text": "__test-text",
-    "createdAt": "__test-date"
-}
+    id: 1,
+    userId: '__test-user',
+    slug: '__test-slug',
+    title: '__test-title',
+    text: '__test-text',
+    createdAt: '__test-date',
+};
 
 describe('Example Routes', () => {
     it('should respond with "Invalid input." for invalid POST request', async () => {

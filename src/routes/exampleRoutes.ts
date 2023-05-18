@@ -1,6 +1,8 @@
-import { Router as createRouter, } from 'express';
-import type { Router } from 'express';
+import { Router as createRouter } from 'express';
+
 import { createExample } from '~controllers/exampleController';
+
+import type { Router } from 'express';
 
 const router: Router = createRouter();
 
@@ -42,7 +44,6 @@ const router: Router = createRouter();
  *           type: string
  *
  */
-
 
 /**
  * @openapi

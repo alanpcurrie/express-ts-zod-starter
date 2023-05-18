@@ -1,6 +1,8 @@
-import { drizzle } from 'drizzle-orm/planetscale-serverless';
 import { connect } from '@planetscale/database';
+import { drizzle } from 'drizzle-orm/planetscale-serverless';
+
 import { notes } from '../db/schema';
+import { logger } from '~utils/logger';
 
 const config = {
     host: process.env.DB_HOST,
@@ -19,9 +21,8 @@ const handler = (async () => {
     try {
         const db = await connectToDatabase();
         const allNotes = await db.select().from(notes);
-        console.log(allNotes);
+        logger.info(`All notes ${allNotes}`);
     } catch (error) {
-
-        console.error(error);
+        logger.error(`❌ Error ${error}`);
     }
 })();

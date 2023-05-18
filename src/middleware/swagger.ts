@@ -1,6 +1,7 @@
-import type { Application } from 'express';
-import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
+import type { Application } from 'express';
 
 export function setupSwagger(app: Application) {
     const options = {
