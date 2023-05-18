@@ -6,8 +6,8 @@ This is a minimal Typesafe TypeScript starter template for an Express.js applica
 
 Before you begin, ensure that you have the following installed:
 
-- Node.js
-- npm (Node Package Manager)
+-   Node.js
+-   npm (Node Package Manager)
 
 ## Getting Started
 
@@ -28,6 +28,7 @@ Before you begin, ensure that you have the following installed:
     npm start
 
     The server will start on http://localhost:3000.
+    swagger file start on http://localhost:3000/api-docs
 
 ## Run the application in Docker
 
