@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const server = z.object({
+const serverSchema = z.object({
     NODE_ENV: z.enum(["development", "test", "production"]),
     DB_HOST: z.string().min(1),
     DB_USERNAME: z.string().min(1),
@@ -16,29 +16,19 @@ const processEnv = {
     DB_URL: process.env.DB_URL,
 };
 
-let env = process.env;
+const validateServerEnv = (env) => {
+    const parsed = serverSchema.safeParse(env);
 
-if (!!process.env.SKIP_ENV_VALIDATION == false) {
-    const parsed = server.safeParse(processEnv);
-
-    if (parsed.success === false) {
-        console.error(
-            "❌ Invalid server-side environment variables:",
-            parsed.error.flatten().fieldErrors
-        );
-        throw new Error("Invalid server-side environment variables");
+    if (!parsed.success) {
+        const fieldErrors = parsed.error.flatten().fieldErrors;
+        console.error("❌ Invalid server-side environment variables:", fieldErrors);
+        throw new Error("❌  Invalid server-side environment variables");
     }
+    return parsed.data;
+};
 
-    env = new Proxy(parsed.data, {
-        get(target, prop) {
-            if (typeof prop !== "string") return undefined;
-            throw new Error(
-                process.env.NODE_ENV === "production"
-                    ? "❌ Attempted to access a server-side environment variable on the client"
-                    : `❌ Attempted to access server-side environment variable '${prop}' on the client`
-            );
-        },
-    });
-}
+const validateEnv = process.env.SKIP_ENV_VALIDATION ? (env) => env : validateServerEnv;
+
+const env = validateEnv(processEnv);
 
 export { env };
